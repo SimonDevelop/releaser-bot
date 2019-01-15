@@ -64,7 +64,8 @@ data.on('commit', function () {
     // Charge last commit
     request(options, function (error, response, body) {
         if (!error && response.statusCode == 200) {
-            if (body[0].commit.message == config.commitMessage) {
+            var regMessage = new RegExp(config.commitMessage, "gi");
+            if (body[0].commit.message.match(regMessage) != null) {
                 data.commit = body[0].sha.substr(0, 6);
                 data.emit('release');
             } else {
@@ -86,13 +87,30 @@ data.on('release', function () {
     });
 });
 
+// Create new release
 data.on('create', function () {
-    console.log(data.releases);
+    var newRelease = {};
+    var lastRelease = '';
     if (data.releases.length > 0) {
-        // lastRelease.tag = releases[0].tag_name;
-        // lastRelease.name = releases[0].name;
+        lastRelease = releases[0].tag_name;
+        var splited = lastRelease.split(".");
+        var major = parseInt(splited[0]);
+        var minor = parseInt(splited[1]);
+        var patch = parseInt(splited[2]);
+
+        var regMessageMajor = new RegExp("major", "gi");
+        var regMessageMinor = new RegExp("minor", "gi");
+        if (releases[0].body.match(regMessageMajor) != null) {
+            major++;
+        } else if (releases[0].body.match(regMessageMinor) != null) {
+            minor++;
+        } else {
+            patch++;
+        }
+        newRelease.tag = major+"."+minor+"."+patch;
+        newRelease.name = "Release "+major+"."+minor+"."+patch;
     } else {
-        // lastRelease.tag = "0.0.1";
-        // lastRelease.name = "Release 0.0.1";
+        newRelease.tag = "0.0.1";
+        newRelease.name = "Release 0.0.1";
     }
 });
