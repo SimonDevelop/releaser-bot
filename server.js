@@ -64,8 +64,8 @@ data.on('commit', function () {
     // Charge last commit
     request(options, function (error, response, body) {
         if (!error && response.statusCode == 200) {
-            if (body.commit.message == config.commitMessage) {
-                data.commit = body.sha.substr(0, 6);
+            if (body[0].commit.message == config.commitMessage) {
+                data.commit = body[0].sha.substr(0, 6);
                 data.emit('release');
             } else {
                 console.log("last commit is not new release");
