@@ -1,0 +1,13 @@
+{
+  "name": "releaser-bot",
+  "description": "Simple bot that handles release generation on github projects.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "SimonDevelop",
+  "license": "MIT",
+  "dependencies": {
+    "request": "^2.88.0"
+  }
+}

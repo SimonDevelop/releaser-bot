@@ -1,0 +1,6 @@
+{
+  "key": "<YOUR_GITHUB_API_KEY>",
+  "repositories": {
+    "<YOUR_GITHUB>/<REPOSITORY>"
+  }
+}
