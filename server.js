@@ -5,6 +5,16 @@ var EventEmitter = require("events").EventEmitter;
 var data = new EventEmitter();
 var apiUrl = "https://api.github.com";
 
+// Default options
+var options = {
+    method: "GET",
+    headers: {
+        'Content-type': 'application/json',
+        'User-Agent': 'releaser-bot',
+        'Authorization': 'token '+config.token
+    }, json: true
+};
+
 http.createServer(function (req, res) {
     if (req.method == 'POST') {
         var b = '';
@@ -34,16 +44,7 @@ http.createServer(function (req, res) {
 function checkRepos(name) {
     for (var i=0; i < config.repositories.length; i++) {
         if (name == config.repositories[i]) {
-            // Default options
-            var options = {
-                url: apiUrl+"/repos/"+config.repositories[i],
-                method: "GET",
-                headers: {
-                    'Content-type': 'application/json',
-                    'User-Agent': 'releaser-bot',
-                    'Authorization': 'token '+config.token
-                }, json: true
-            };
+            options.url = apiUrl+"/repos/"+config.repositories[i];
             // Check repos
             request(options, function (error, response, body) {
                 if (!error && response.statusCode == 200) {
