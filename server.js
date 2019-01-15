@@ -15,11 +15,11 @@ http.createServer(function (req, res) {
             try {
                 var post = JSON.parse(b);
                 console.log(post);
-                res.writeHead(200, {"Content-Type": "text/plain"});
+                res.writeHead(200, {"Content-Type": "application/json"});
                 res.end({"message": "Webhook received!"});
                 return;
             } catch (err) {
-                res.writeHead(500, {"Content-Type": "text/plain"});
+                res.writeHead(500, {"Content-Type": "application/json"});
                 res.write("Bad Post Data.");
                 res.end();
                 return;
@@ -28,7 +28,7 @@ http.createServer(function (req, res) {
     } else {
         res.end('not found');
     }
-}).listen(8989);
+}).listen(8989, "127.0.0.1");
 
 // for (var i=0; i < config.repositories.length; i++) {
 //     // Default options
