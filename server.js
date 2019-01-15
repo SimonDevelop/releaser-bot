@@ -8,6 +8,7 @@ for (var i=0; i < config.repositories.length; i++) {
     // Default options
     var options = {
         url: apiUrl+"/repos/"+config.repositories[i],
+        method: "GET",
         headers: {
             'Content-type': 'application/json',
             'User-Agent': 'releaser-bot',
@@ -19,14 +20,26 @@ for (var i=0; i < config.repositories.length; i++) {
     request(options, function (error, response, body) {
         if (!error && response.statusCode == 200) {
             data.json = body;
-            data.emit('update');
+            data.emit('commit');
         }
     });
 }
 
+// Check last commit
+data.on('commit', function () {
+    options.url = apiUrl+"/repos/"+data.json.full_name+"/commits";
+
+    // Charge last commit
+    request(options, function (error, response, body) {
+        if (!error && response.statusCode == 200) {
+            console.log(body[0]);
+        }
+    });
+});
+
 // Check last release
-data.on('update', function () {
-    options.url = apiUrl+"/repos/"+data.json.full_name+"/releases"
+data.on('release', function () {
+    options.url = apiUrl+"/repos/"+data.json.full_name+"/releases";
 
     // Charge last release
     request(options, function (error, response, body) {
@@ -37,13 +50,13 @@ data.on('update', function () {
     });
 });
 
-data.on('release', function () {
+data.on('release2', function () {
     console.log(data.releases);
-    // if (releases.length > 0) {
-    //     lastRelease.tag = releases[0].tag_name;
-    //     lastRelease.name = releases[0].name;
-    // } else {
-    //     lastRelease.tag = "0.0.1";
-    //     lastRelease.name = "Release 0.0.1";
-    // }
+    if (data.releases.length > 0) {
+        // lastRelease.tag = releases[0].tag_name;
+        // lastRelease.name = releases[0].name;
+    } else {
+        // lastRelease.tag = "0.0.1";
+        // lastRelease.name = "Release 0.0.1";
+    }
 });
