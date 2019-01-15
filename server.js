@@ -16,11 +16,12 @@ http.createServer(function (req, res) {
                 var post = JSON.parse(b);
                 console.log(post);
                 res.writeHead(200, {"Content-Type": "application/json"});
-                res.end({"message": "Webhook received!"});
+                res.write('{"message": "Webhook received!"}');
+                res.end();
             } catch (err) {
-                console.log(err)
+                console.log(err);
                 res.writeHead(500, {"Content-Type": "application/json"});
-                res.write({"message": "Bad Post Data."});
+                res.write('{"message": "Bad Post Data."}');
                 res.end();
             }
         });
