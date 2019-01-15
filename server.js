@@ -28,7 +28,7 @@ http.createServer(function (req, res) {
     } else {
         res.end('not found');
     }
-}).listen(8080);
+}).listen(8989);
 
 // for (var i=0; i < config.repositories.length; i++) {
 //     // Default options
