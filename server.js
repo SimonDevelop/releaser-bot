@@ -15,12 +15,9 @@ http.createServer(function (req, res) {
             try {
                 var post = JSON.parse(b);
             } catch (err) {
-                res.writeHead(500, {"Content-Type": "application/json"});
-                res.write({"message": "Bad Post Data."})
-                res.end();
-                return;
+                var post = 'undefined'
             }
-            if (typeof post != 'undefined') {
+            if (typeof post != 'undefined' && post != 'undefined') {
                 console.log(post);
                 res.writeHead(200, {"Content-Type": "application/json"});
                 res.end({"message": "Webhook received!"});
