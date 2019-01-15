@@ -5,7 +5,7 @@ var EventEmitter = require("events").EventEmitter;
 var data = new EventEmitter();
 var apiUrl = "https://api.github.com";
 
-// Default options
+// Default request options
 var options = {
     method: "GET",
     headers: {
@@ -15,6 +15,7 @@ var options = {
     }, json: true
 };
 
+// Server for webhooks
 http.createServer(function (req, res) {
     if (req.method == 'POST') {
         var b = '';
@@ -41,11 +42,12 @@ http.createServer(function (req, res) {
     }
 }).listen(9898, "127.0.0.1");
 
+// Check repos
 function checkRepos(name) {
     for (var i=0; i < config.repositories.length; i++) {
         if (name == config.repositories[i]) {
             options.url = apiUrl+"/repos/"+config.repositories[i];
-            // Check repos
+            // Charge repos
             request(options, function (error, response, body) {
                 if (!error && response.statusCode == 200) {
                     data.json = body;
@@ -59,11 +61,15 @@ function checkRepos(name) {
 // Check last commit
 data.on('commit', function () {
     options.url = apiUrl+"/repos/"+data.json.full_name+"/commits";
-
     // Charge last commit
     request(options, function (error, response, body) {
         if (!error && response.statusCode == 200) {
-            console.log(body[0]);
+            if (body.commit.message == config.commitMessage) {
+                data.commit = body.sha.substr(0, 6);
+                data.emit('release');
+            } else {
+                console.log("last commit is not new release");
+            }
         }
     });
 });
@@ -71,17 +77,16 @@ data.on('commit', function () {
 // Check last release
 data.on('release', function () {
     options.url = apiUrl+"/repos/"+data.json.full_name+"/releases";
-
     // Charge last release
     request(options, function (error, response, body) {
         if (!error && response.statusCode == 200) {
             data.releases = body;
-            data.emit('release');
+            data.emit('create');
         }
     });
 });
 
-data.on('release2', function () {
+data.on('create', function () {
     console.log(data.releases);
     if (data.releases.length > 0) {
         // lastRelease.tag = releases[0].tag_name;

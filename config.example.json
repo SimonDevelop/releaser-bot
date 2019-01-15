@@ -1,5 +1,6 @@
 {
   "token": "<GITHUB_ACCOUNT_TOKEN>",
+  "commitMessage": "<COMMIT_MESSAGE>",
   "repositories": [
     "<YOUR_GITHUB>/<REPOSITORY>"
   ]
