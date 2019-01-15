@@ -1,5 +1,4 @@
 {
-  "username": "<GITHUB_ACCOUNT_USERNAME>",
   "token": "<GITHUB_ACCOUNT_TOKEN>",
   "repositories": [
     "<YOUR_GITHUB>/<REPOSITORY>"
