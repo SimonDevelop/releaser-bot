@@ -1,4 +1,4 @@
-[![version](https://img.shields.io/badge/Version-0.2.1-brightgreen.svg)](https://github.com/SimonDevelop/releaser-bot/releases/tag/0.2.1)
+[![version](https://img.shields.io/badge/Version-0.2.2-brightgreen.svg)](https://github.com/SimonDevelop/releaser-bot/releases/tag/0.2.2)
 [![Minimum Node Version](https://img.shields.io/badge/node-%3E%3D%206-brightgreen.svg)](https://nodejs.org/en/)
 [![GitHub license](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/SimonDevelop/releaser-bot/blob/master/LICENSE)
 # releaser-bot
