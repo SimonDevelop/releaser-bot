@@ -115,6 +115,7 @@ data.on('create', function () {
     }
 
     // Request for create new release
+    options.method = "POST";
     options.url = apiUrl+"/repos/"+data.json.full_name+"/releases";
     options.json = {
         "tag_name": newRelease.tag,
@@ -131,4 +132,5 @@ data.on('create', function () {
             console.log("Creating "+newRelease.name+" for "+data.json.full_name+" is failed!");
         }
     });
+    options.method = "GET";
 });
