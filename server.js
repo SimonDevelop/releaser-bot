@@ -113,4 +113,22 @@ data.on('create', function () {
         newRelease.tag = "0.0.1";
         newRelease.name = "Release 0.0.1";
     }
+
+    // Request for create new release
+    options.url = apiUrl+"/repos/"+data.json.full_name+"/releases";
+    options.json = {
+        "tag_name": newRelease.tag,
+        "target_commitish": "master",
+        "name": newRelease.name,
+        "body": "",
+        "draft": false,
+        "prerelease": false
+    };
+    request(options, function (error, response, body) {
+        if (!error && response.statusCode == 200) {
+            console.log(newRelease.name+" for "+data.json.full_name+" is created!");
+        } else {
+            console.log("Creating "+newRelease.name+" for "+data.json.full_name+" is failed!");
+        }
+    });
 });
