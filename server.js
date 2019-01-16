@@ -92,7 +92,7 @@ data.on('create', function () {
     var newRelease = {};
     var lastRelease = '';
     if (data.releases.length > 0) {
-        lastRelease = releases[0].tag_name;
+        lastRelease = data.releases[0].tag_name;
         var splited = lastRelease.split(".");
         var major = parseInt(splited[0]);
         var minor = parseInt(splited[1]);
@@ -100,9 +100,9 @@ data.on('create', function () {
 
         var regMessageMajor = new RegExp("major", "gi");
         var regMessageMinor = new RegExp("minor", "gi");
-        if (releases[0].body.match(regMessageMajor) != null) {
+        if (data.releases[0].body.match(regMessageMajor) != null) {
             major++;
-        } else if (releases[0].body.match(regMessageMinor) != null) {
+        } else if (data.releases[0].body.match(regMessageMinor) != null) {
             minor++;
         } else {
             patch++;
