@@ -52,6 +52,8 @@ function checkRepos(name) {
                 if (!error && response.statusCode == 200) {
                     data.json = body;
                     data.emit('commit');
+                } else {
+                    console.log("Reposiroty does not exist or unauthorized access");
                 }
             });
         }
@@ -65,8 +67,23 @@ data.on('commit', function () {
     request(options, function (error, response, body) {
         if (!error && response.statusCode == 200) {
             var regMessage = new RegExp(config.commitMessage, "gi");
+            // check and compare commit sha
             if (body[0].commit.message.match(regMessage) != null
             && (typeof data.commit == "undefined" || data.commit != body[0].sha.substr(0, 6))) {
+                // Generate release description
+                var split = body[0].commit.message.split("\n\n");
+                var array = [];
+                if (split.length > 1) {
+                    for (var i=0; i < split.length; i++) {
+                        if (i > 0) {
+                            array.push(split[i]);
+                        }
+                    }
+                    data.description = array.join("\n\n");
+                } else {
+                    data.description = "";
+                }
+                // Storage commit sha
                 data.commit = body[0].sha.substr(0, 6);
                 data.emit('release');
             } else {
@@ -122,7 +139,7 @@ data.on('create', function () {
         "tag_name": newRelease.tag,
         "target_commitish": "master",
         "name": newRelease.name,
-        "body": "",
+        "body": data.description,
         "draft": false,
         "prerelease": false
     };
