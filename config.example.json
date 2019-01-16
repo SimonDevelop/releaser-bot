@@ -1,6 +1,7 @@
 {
-  "key": "<YOUR_GITHUB_API_KEY>",
-  "repositories": {
+  "token": "<GITHUB_ACCOUNT_TOKEN>",
+  "commitMessage": "<COMMIT_MESSAGE>",
+  "repositories": [
     "<YOUR_GITHUB>/<REPOSITORY>"
-  }
+  ]
 }
