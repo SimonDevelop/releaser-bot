@@ -26,7 +26,3 @@ $ npm start
 ## Webhooks
 Add the address of your nodejs server to the webhooks of your github projects classified in your config.json file.
 Specify the content type on application/json and check `Just the push event.`.
-
-## TODO
- - [x] Simple release creation
- - [x] Add description release with commit body
