@@ -77,6 +77,7 @@ data.on('commit', function () {
                 // Generate release description
                 var split = body[0].commit.message.split("\n\n");
                 var array = [];
+                data.titleCommit = split[0];
                 if (split.length > 1) {
                     for (var i=0; i < split.length; i++) {
                         if (i > 0) {
@@ -122,10 +123,13 @@ data.on('create', function () {
 
         var regMessageMajor = new RegExp("major", "gi");
         var regMessageMinor = new RegExp("minor", "gi");
-        if (data.releases[0].body.match(regMessageMajor) != null) {
+        if (data.titleCommit.match(regMessageMajor) != null) {
             major++;
-        } else if (data.releases[0].body.match(regMessageMinor) != null) {
+            minor = 0;
+            patch = 0;
+        } else if (data.titleCommit.match(regMessageMinor) != null) {
             minor++;
+            patch = 0;
         } else {
             patch++;
         }
