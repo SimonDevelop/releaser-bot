@@ -65,7 +65,8 @@ data.on('commit', function () {
     request(options, function (error, response, body) {
         if (!error && response.statusCode == 200) {
             var regMessage = new RegExp(config.commitMessage, "gi");
-            if (body[0].commit.message.match(regMessage) != null) {
+            if (body[0].commit.message.match(regMessage) != null
+            && (typeof data.commit == "undefined" || data.commit != body[0].sha.substr(0, 6))) {
                 data.commit = body[0].sha.substr(0, 6);
                 data.emit('release');
             } else {
@@ -126,7 +127,7 @@ data.on('create', function () {
         "prerelease": false
     };
     request(options, function (error, response, body) {
-        if (!error && response.statusCode == 200) {
+        if (!error && response.statusCode == 201) {
             console.log(newRelease.name+" for "+data.json.full_name+" is created!");
         } else {
             console.log("Creating "+newRelease.name+" for "+data.json.full_name+" is failed!");
