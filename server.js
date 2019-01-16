@@ -25,8 +25,12 @@ http.createServer(function (req, res) {
         req.on('end', function () {
             try {
                 var post = JSON.parse(b);
-                console.log("webhook detected for "+post.repository.full_name);
-                checkRepos(post.repository.full_name);
+                if (post.ref == "refs/heads/master") {
+                    console.log("webhook detected for "+post.repository.full_name);
+                    checkRepos(post.repository.full_name);
+                } else {
+                    console.log("webhook detected for "+post.repository.full_name+" but is not master branch");
+                }
                 res.writeHead(200, {"Content-Type": "application/json"});
                 res.write('{"message": "Webhook received!"}');
                 res.end();
