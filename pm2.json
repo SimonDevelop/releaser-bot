@@ -1,0 +1,5 @@
+{
+  "name": "releaser-bot",
+  "script": "server.js",
+  "instances": "2"
+}

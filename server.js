@@ -44,7 +44,7 @@ http.createServer(function (req, res) {
     } else {
         res.end('not found');
     }
-}).listen(9898, "127.0.0.1");
+}).listen(9898, "0.0.0.0");
 
 // Check repos
 function checkRepos(name) {
