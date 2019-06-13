@@ -2,6 +2,7 @@
   "name": "releaser-bot",
   "description": "Simple bot that handles release generation on github projects.",
   "main": "server.js",
+  "private": true,
   "scripts": {
     "start": "node server.js"
   },
