@@ -150,7 +150,7 @@ data.on('create', function () {
     options.url = `${API_URL}/repos/${data.json.full_name}/releases`;
     options.json = {
         "tag_name": newRelease.tag,
-        "target_commitish": config.defaultBranch,
+        "target_commitish": data.json.default_branch,
         "name": newRelease.name,
         "body": data.description,
         "draft": false,

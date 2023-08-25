@@ -5,6 +5,5 @@
     "<YOUR_GITHUB>/<REPOSITORY>"
   ],
   "minorTerm": "<YOUR_MINOR_TERM>",
-  "majorTerm": "<YOUR_MAJOR_TERM>",
-  "defaultBranch": "<main|master>"
+  "majorTerm": "<YOUR_MAJOR_TERM>"
 }
