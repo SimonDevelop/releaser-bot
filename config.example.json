@@ -3,5 +3,8 @@
   "commitMessage": "<COMMIT_MESSAGE>",
   "repositories": [
     "<YOUR_GITHUB>/<REPOSITORY>"
-  ]
+  ],
+  "minorTerm": "<YOUR_MINOR_TERM>",
+  "majorTerm": "<YOUR_MAJOR_TERM>",
+  "defaultBranch": "<main|master>"
 }
