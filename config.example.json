@@ -1,9 +1,12 @@
 {
+  "ip": "0.0.0.0",
+  "port": 9898,
   "token": "<GITHUB_ACCOUNT_TOKEN>",
   "commitMessage": "<COMMIT_MESSAGE>",
   "repositories": [
     "<YOUR_GITHUB>/<REPOSITORY>"
   ],
   "minorTerm": "<YOUR_MINOR_TERM>",
-  "majorTerm": "<YOUR_MAJOR_TERM>"
+  "majorTerm": "<YOUR_MAJOR_TERM>",
+  "releasePrefix": "<PREFIX_TEXT_VERSION>"
 }
